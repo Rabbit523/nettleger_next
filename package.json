@@ -1,0 +1,30 @@
+{
+  "name": "nettleger-frontend-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "antd": "^4.8.4",
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
+    "html-react-parser": "^0.14.1",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
+    "next": "10.0.1",
+    "next-compose-plugins": "^2.2.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-icons": "^4.1.0",
+    "react-loader-spinner": "^3.1.14",
+    "react-phone-number-input": "^3.1.6",
+    "ree-validate": "^3.3.2",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.11.1"
+  }
+}

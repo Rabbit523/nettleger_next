@@ -1,0 +1,4 @@
+cd /var/www/vhosts/nettleger-frontend-next
+chown -R www-data:www-data /var/www/vhosts/nettleger-frontend-next
+find /var/www/vhosts/nettleger-frontend-next -type f -exec chmod 644 {} \;
+find /var/www/vhosts/nettleger-frontend-next -type d -exec chmod 755 {} \;
