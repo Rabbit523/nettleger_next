@@ -20,6 +20,7 @@
     "react-dom": "17.0.1",
     "react-icons": "^4.1.0",
     "react-loader-spinner": "^3.1.14",
+    "react-modal": "^3.12.1",
     "react-phone-number-input": "^3.1.6",
     "ree-validate": "^3.3.2",
     "styled-components": "^5.2.1"

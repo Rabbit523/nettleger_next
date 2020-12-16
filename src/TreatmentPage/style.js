@@ -195,3 +195,57 @@ export const STreatment3Box = styled.div`
     }
   }
 `
+export const PaymentListBox = styled.div`
+  span.card-name {
+    font-size: 15px;
+  }
+  div.btn-group {
+    float: right;
+  }
+  button.btn-cancel {
+    margin-right: 10px;
+  }
+`
+export const ProcessPaymentBox = styled.div`
+  div.card {
+    display: flex;
+    flex-direction: row;
+
+    div.card-info {
+      flex: 5;
+
+      div.card-info-row {
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        div.stype {
+          flex: 3;
+        }
+
+        div.svalue {
+          flex: 4;
+
+          #cvv2 {
+            width: 50px;
+          }
+        }
+      }
+    }
+
+    div.card-img {
+      flex: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  div.btn-group {
+    float: right;
+  }
+  button.btn-cancel, button.btn-previous {
+    margin-right: 10px;
+  }
+`
+
