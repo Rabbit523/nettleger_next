@@ -19,6 +19,7 @@ const today = new Date();
 Modal.setAppElement('#__next')
 
 function TreatmentStep4 (props) {
+  const [form] = Form.useForm();
   const [modalIsOpen,setIsOpen] = React.useState(false)
   const [payment, setPayment] = React.useState('visa')
   const [modalContentType, setModalContentType] = React.useState('PaymentListBox')
@@ -35,10 +36,32 @@ function TreatmentStep4 (props) {
     setYear(today.getFullYear())
     setPan('')
     setSecurityCode('')
+    form.setFieldsValue({
+      pan: '',
+      cvv2: ''
+    })
   }
  
   function closeModal() {
     setIsOpen(false)
+  }
+
+  function handlePan(e) {
+    if (e.target.validity.valid) {
+      setPan(e.target.value)
+      form.setFieldsValue({ pan: e.target.value })
+    } else {
+      form.setFieldsValue({ pan })
+    }
+  }
+
+  function handleSecurityCode(e) {
+    if (e.target.validity.valid) {
+      setSecurityCode(e.target.value)
+      form.setFieldsValue({ cvv2: e.target.value })
+    } else {
+      form.setFieldsValue({ cvv2 })
+    }
   }
 
   async function handlePay() {
@@ -47,7 +70,8 @@ function TreatmentStep4 (props) {
     const { ok, data } = await customAxios.post('/api/custom/registerNets', {
       pan,
       securityCode,
-      expiryDate: month + '' + year.toString().substring(2, 4)
+      expiryDate: month + '' + year.toString().substring(2, 4),
+      amount: 299*100
     })
     
     if (ok) {
@@ -108,79 +132,96 @@ function TreatmentStep4 (props) {
         {
           modalContentType == 'ProcessPaymentBox' && 
           <ProcessPaymentBox>
-            <div className="card">
-              <div className="card-info">
-                <div className="card-info-row">
-                  <div className="stype">
-                    Kortnummer
-                  </div>
-                  <div className="svalue">
-                    <Input id="pan" onChange={(e) => setPan(e.target.value)} placeholder="0000000000000000"/>
-                  </div>
-                </div>
-                <div className="card-info-row">
-                  <div className="stype">
-                    Utløpsdato (Måned/år)
-                  </div>
-                  <div className="svalue">
-                  <Select defaultValue={month} style={{ width: 70, marginRight: 10 }} onChange={(v) => setMonth(v)}>
-                    <Select.Option value="01">01</Select.Option>
-                    <Select.Option value="02">02</Select.Option>
-                    <Select.Option value="03">03</Select.Option>
-                    <Select.Option value="04">04</Select.Option>
-                    <Select.Option value="05">05</Select.Option>
-                    <Select.Option value="06">06</Select.Option>
-                    <Select.Option value="07">07</Select.Option>
-                    <Select.Option value="08">08</Select.Option>
-                    <Select.Option value="09">09</Select.Option>
-                    <Select.Option value="10">10</Select.Option>
-                    <Select.Option value="11">11</Select.Option>
-                    <Select.Option value="12">12</Select.Option>
-                  </Select>
-                  <Select defaultValue={year} style={{ width: 90 }} onChange={(v) => setyear(v)}>
-                    {
-                      Array.from(Array(2051 - today.getFullYear()).keys()).map((v, index) => {
-                        return <Select.Option key={index} value={today.getFullYear() + v}>{today.getFullYear() + v}</Select.Option>
-                      })
-                    }
-                  </Select>
-                  </div>
-                </div>
-                {
-                  payment != 'maestro' && payment != 'märkeskort_ikano' && 
+            <Form
+              form={form}
+              onFinish={handlePay}
+            >
+              <div className="card">
+                <div className="card-info">
                   <div className="card-info-row">
                     <div className="stype">
-                      CVV2
+                      Kortnummer
                     </div>
                     <div className="svalue">
-                      <Input id="cvv2" onChange={(e) => setSecurityCode(e.target.value)} placeholder="000"/>
+                      <Form.Item
+                        name="pan"
+                        rules={[{ required: true, message: 'Please input card number!' }]}
+                      >
+                        <Input id="pan" pattern="[0-9]*" onChange={(e) => handlePan(e)} placeholder="0000000000000000"/>
+                      </Form.Item>
                     </div>
                   </div>
-                }
+                  <div className="card-info-row">
+                    <div className="stype">
+                      Utløpsdato (Måned/år)
+                    </div>
+                    <div className="svalue">
+                      <Form.Item>
+                        <Select defaultValue={month} style={{ width: 70, marginRight: 10 }} onChange={(v) => setMonth(v)}>
+                          <Select.Option value="01">01</Select.Option>
+                          <Select.Option value="02">02</Select.Option>
+                          <Select.Option value="03">03</Select.Option>
+                          <Select.Option value="04">04</Select.Option>
+                          <Select.Option value="05">05</Select.Option>
+                          <Select.Option value="06">06</Select.Option>
+                          <Select.Option value="07">07</Select.Option>
+                          <Select.Option value="08">08</Select.Option>
+                          <Select.Option value="09">09</Select.Option>
+                          <Select.Option value="10">10</Select.Option>
+                          <Select.Option value="11">11</Select.Option>
+                          <Select.Option value="12">12</Select.Option>
+                        </Select>
+                        <Select defaultValue={year} style={{ width: 90 }} onChange={(v) => setyear(v)}>
+                          {
+                            Array.from(Array(2051 - today.getFullYear()).keys()).map((v, index) => {
+                              return <Select.Option key={index} value={today.getFullYear() + v}>{today.getFullYear() + v}</Select.Option>
+                            })
+                          }
+                        </Select>
+                      </Form.Item>
+                    </div>
+                  </div>
+                  {
+                    payment != 'maestro' && payment != 'märkeskort_ikano' && 
+                    <div className="card-info-row">
+                      <div className="stype">
+                        CVV2
+                      </div>
+                      <div className="svalue">
+                        <Form.Item
+                          name="cvv2"
+                          rules={[{ required: true, message: 'Please input cvv2!' }]}
+                        >
+                          <Input id="cvv2" pattern="[0-9]*" onChange={(e) => handleSecurityCode(e)} placeholder="000"/>
+                        </Form.Item>
+                      </div>
+                    </div>
+                  }
+                </div>
+                <div className="card-img">
+                  {
+                    payment == 'visa' ?
+                      <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/visa_0.png`} alt="Visa" />
+                    : payment == 'mastercard' ?
+                      <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/mastercard_0.png`} alt="Mastercard" />
+                    : payment == 'american_express' ?
+                      <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/amex_0.png`} alt="American Express" />
+                    : payment == 'diners_club' ?
+                      <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/diners_0.jpg`} alt="Diners Club" />
+                    : payment == 'jcb' ?
+                      <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/jcb_0.png`} alt="JCB" />
+                    : payment == 'maestro' ?
+                      <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/maestro_0.png`} alt="Maestro" />
+                    : <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/svwIkano_0.png`} alt="Märkeskort Ikano" />
+                  }
+                </div>
               </div>
-              <div className="card-img">
-                {
-                  payment == 'visa' ?
-                    <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/visa_0.png`} alt="Visa" />
-                  : payment == 'mastercard' ?
-                    <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/mastercard_0.png`} alt="Mastercard" />
-                  : payment == 'american_express' ?
-                    <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/amex_0.png`} alt="American Express" />
-                  : payment == 'diners_club' ?
-                    <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/diners_0.jpg`} alt="Diners Club" />
-                  : payment == 'jcb' ?
-                    <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/jcb_0.png`} alt="JCB" />
-                  : payment == 'maestro' ?
-                    <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/maestro_0.png`} alt="Maestro" />
-                  : <img src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/svwIkano_0.png`} alt="Märkeskort Ikano" />
-                }
+              <div className="btn-group">
+                <Button className="btn-previous" onClick={() => setModalContentType('PaymentListBox')}>{'<'} Tilbake</Button>
+                <Button className="btn-cancel" onClick={() => closeModal()}>Avbryt</Button>
+                <Button type="primary" htmlType="submit" className="btn-pay">Betal</Button>
               </div>
-            </div>
-            <div className="btn-group">
-              <Button className="btn-previous" onClick={() => setModalContentType('PaymentListBox')}>{'<'} Tilbake</Button>
-              <Button className="btn-cancel" onClick={() => closeModal()}>Avbryt</Button>
-              <Button className="btn-pay" onClick={() => handlePay()}>Betal</Button>
-            </div>
+            </Form>
           </ProcessPaymentBox>
         }
       </Modal>

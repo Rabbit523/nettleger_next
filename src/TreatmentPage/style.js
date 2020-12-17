@@ -217,8 +217,6 @@ export const ProcessPaymentBox = styled.div`
       div.card-info-row {
         display: flex;
         flex-direction: row;
-        margin-top: 10px;
-        margin-bottom: 10px;
         div.stype {
           flex: 3;
         }
