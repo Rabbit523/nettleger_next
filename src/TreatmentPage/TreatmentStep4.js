@@ -171,7 +171,7 @@ function TreatmentStep4 (props) {
                           <Select.Option value="11">11</Select.Option>
                           <Select.Option value="12">12</Select.Option>
                         </Select>
-                        <Select defaultValue={year} style={{ width: 90 }} onChange={(v) => setyear(v)}>
+                        <Select defaultValue={year} style={{ width: 90 }} onChange={(v) => setYear(v)}>
                           {
                             Array.from(Array(2051 - today.getFullYear()).keys()).map((v, index) => {
                               return <Select.Option key={index} value={today.getFullYear() + v}>{today.getFullYear() + v}</Select.Option>
