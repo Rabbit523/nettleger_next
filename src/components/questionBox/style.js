@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 
 export const QuestionTag = styled.div`
-  margin-top: 15px;
+  margin: 15px 0;
   .question-tag--header {
     max-width: 50px;
-    background: #47ffb3;
+    background: #0080f6;
+    color: #fff;
     display: flex;
     justify-content: center;
     padding: 5px;
@@ -16,6 +17,7 @@ export const QuestionTag = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     height: 135px;
     p {
       margin: 0;
