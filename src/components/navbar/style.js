@@ -1,8 +1,13 @@
 import styled from 'styled-components'
-import { Layout, Space, Button } from 'antd'
+import { Layout, Space, Button, Menu } from 'antd'
 
 const { Header } = Layout
 
+export const SMenu = styled(Menu)`
+  min-width: 170px;
+  margin-top: 13px;
+  margin-right: -14px;
+`
 export const SHeader = styled(Header)`
   background: #fff;
   box-shadow: 2px 2px 0px -1px #ccc;
@@ -17,9 +22,7 @@ export const SHeader = styled(Header)`
   }
   button {
     align-self: center;
-    background: transparent;
     border: none;
-    color: #fff;
     font-weight: bold;
     font-size: 18px;
     cursor: pointer;
@@ -29,6 +32,23 @@ export const SHeader = styled(Header)`
     &:hover, &:focus {
       outline: none;
     }
+    &.menu {
+      span {
+        color: #000;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+      }
+    }
+  }
+  @media (min-width: 320px) {
+    padding: 0;
+  }
+  @media (min-width: 768px) {
+    padding: 0 50px;
   }
 `
 export const SContainer = styled.div`
@@ -43,6 +63,12 @@ export const SContainer = styled.div`
   align-items: ${props => props.align ? props.align : 'center'};
   flex-direction: ${props => props.direction ? props.direction : 'row'};
   // Small devices (landscape phones, 576px and up)
+  @media (min-width: 320px) {
+    flex-direction: column;
+    &.nav-container {
+      flex-direction: ${props => props.direction ? props.direction : 'row'};  
+    }
+  }
   @media (min-width: 576px) { 
     max-width: 540px;
   }
@@ -55,6 +81,7 @@ export const SContainer = styled.div`
   // Large devices (desktops, 992px and up)
   @media (min-width: 992px) {
     max-width: 960px;
+    flex-direction: ${props => props.direction ? props.direction : 'row'};
   }
 
   // Extra large devices (large desktops, 1200px and up)
@@ -79,9 +106,9 @@ export const SMenuItem = styled.div`
     color: #000;
   }
   &:hover {
-    border-bottom: 2px solid #58daf9;
+    border-bottom: 2px solid #0080f6;
     a {
-      color: #58daf9;
+      color: #0080f6;
     }
   }
 `
@@ -92,13 +119,18 @@ export const SNavButtonGroup = styled(Space)`
   justify-content: space-between;
 `
 export const SNavButton = styled(Button)`
-  background: #47ffb3 !important;
-  color: #000 !important;
-  font-size: 15px !important;
+  background: #0080f6;
+  color: #fff;
+  font-size: 12px !important;
   text-transform: uppercase;
   font-family: 'Poppins-Bold';
   padding: 5px 15px;
+  border-radius: 25px;
   span {
     padding: 0 !important;
+  }
+  &:hover, &:focus, &:active {
+    background: #83b9ea;
+    color: #fff;
   }
 `

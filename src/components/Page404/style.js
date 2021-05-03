@@ -7,10 +7,33 @@ export const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   min-height: 320px;
+  &.info {
+    max-width: 64rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
 `
 export const Title = styled.div`
   position: relative;
   height: 240px;
+  &.info {
+    height: auto;
+    width: 100%;
+    text-align: center;
+    h2 {
+      font-family: 'Poppins-Bold';
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+      @media (min-width: 40em) {
+        font-size: 2.5rem;
+        line-height: 3rem;
+      }
+      @media (min-width: 64em) {
+        font-size: 50px;
+        line-height: 3.75rem;
+      }
+    }
+  }
   h1 {
     font-family: 'Montserrat', sans-serif;
     position: absolute;
@@ -51,6 +74,16 @@ export const Title = styled.div`
 `
 export const Description = styled.div`
   text-align: center;
+  &.info {
+    h2 {
+      text-transform: unset;
+    }
+    p {
+      max-width: none;
+      margin: 0 0 1em 0;
+      padding: unset;
+    }
+  }
   h2 {
     font-family: 'Cabin', sans-serif;
     font-size: 20px;
@@ -73,4 +106,10 @@ export const Description = styled.div`
       font-size: 16px;
     }
   }
+`
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+  width: 100%;
 `
