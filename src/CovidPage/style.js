@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import parse from 'html-react-parser'
 import { Layout, Button, Divider } from 'antd'
 
 export const SLayout = styled(Layout)`
@@ -213,166 +212,69 @@ export const Treatment1Box = styled.div`
     }
   }
 `
-export const STreatment2Box = styled.div`
-  h2 {
-    font-size: 30px;
+export const CovidStep1Box = styled.div`
+  h1 {
     font-family: 'Poppins-bold';
   }
-  label {
-    .anticon-question-circle {
-      padding-left: 5px;
+  h5 {
+    font-size: 18px;
+    font-family: 'Poppins-bold';
+  }
+  ul {
+    margin-left: -20px;
+    li {
+      color: #5e5e5e;
+      font-size: 16px;
     }
   }
-`
-export const GroupBox = styled.div`
-  .group-box {
+  .img-group {
     display: flex;
-    .box {
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      max-width: 350px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-      padding: 25px;
+    align-items: center;
+    .img-wrapper {
+      width: 70px;
+      height: 50px;
+      background: transparent;
+      border: none;
+      margin-right: 15px;
       border: 1px solid transparent;
       cursor: pointer;
-      .title {
-        font-family: 'Poppins-Bold';
-        font-weight: bold;
-        font-size: 18px;
-        margin: 0;
-        padding-bottom: 15px;
+      display: flex;
+      align-items: center;
+      img {
+        width: 100%;
       }
-      &:hover {
-        background: #f1f5ff;
-        border: 1px solid #407bff;
-        cursor: pointer;
-      }
-      &.active {
-        background: #e5f2ff;
-        border: 1px solid #0080f6;
+      &:focus {
+        outline: none;
+        border-color: #e1e1e1;
       }
     }
   }
   @media (min-width: 320px) {
-    .group-box {
-      flex-direction: column;
+    h1 {
+      font-size: 30px;
+    }
+  }
+  @media (min-width: 414px) {
+    h1 {
+      font-size: 36px;
     }
   }
   @media (min-width: 768px) {
-    .group-box {
-      flex-direction: row;
-      justify-content: space-between;
+    h1 {
+      font-size: 40px;
     }
   }
 `
-export const SelectBox = styled.div`
-  min-width: 250px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  label {
-    font-size: 16px;
-    color: #5e5e5e;
-    margin-bottom: 8px;
-  }
-  .ant-select-selector {
-    height: 40px !important;
-    align-items: center;
-  }
-`
-export const CheckBox = styled.div`
-  min-width: 250px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-`
-export const RadioGroupBox = styled.div`
-  min-width: 250px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  label {
-    font-size: 16px;
-    color: #5e5e5e;
-    margin-bottom: 8px;
-  }
-  .ant-radio-wrapper {
-    display: block;
-    height: 30px;
-    line-height: 30px;
-  }
-`
-export const TextareaBox = styled.div`
-  min-width: 250px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  label {
-    font-size: 16px;
-    color: #5e5e5e;
-    margin-bottom: 8px;
-  }
-`
-export const InputNumberBox = styled.div`
-  min-width: 250px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  label {
-    font-size: 16px;
-    color: #5e5e5e;
-    margin-bottom: 8px;
-  }
-  .ant-input {
-    height: 40px !important;
-  }
-  .ant-input-number{
-    width: 100%;
-    align-items: center;
-    input {
-      height: 40px !important;
-    }
-  }
-`
-export const DateBox = styled.div`
-  min-width: 250px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  label {
-    font-size: 16px;
-    color: #5e5e5e;
-    margin-bottom: 8px;
-  }
-  .ant-picker {
-    width: 100%;
-    font-size: 16px;
-    input {
-      height: 40px;
-    }
+export const CovidStep2Box = styled.div`
+  min-height: calc(100vh - 300px);
+  height: ${props => props.height ? `${props.height}px` : '640px'};
+  iframe {
+    border: none;
+    overflow-y: hidden;
   }
 `
 export const SDivider = styled(Divider)`
   margin: 12px 0;
-`
-export const STreatment3Box = styled.div`
-  h2 {
-    font-size: 30px;
-    font-family: 'Poppins-bold';
-  }
-  p {
-    a {
-      text-decoration: underline;
-    }
-  }
 `
 export const PaymentListBox = styled.div`
   span.card-name {
@@ -419,52 +321,3 @@ export const ProcessPaymentBox = styled.div`
     margin-right: 10px;
   }
 `
-
-export const ModuleCardBox = styled.div`
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  max-width: 350px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  padding: 25px;
-  border: 1px solid transparent;
-  .module-card--header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    p {
-      font-family: 'Poppins-Bold';
-      font-weight: bold;
-      font-size: 18px;
-      margin: 0;
-      padding-bottom: 15px;
-    }
-  }
-  &:hover {
-    background: #f1f5ff;
-    border: 1px solid #407bff;
-    cursor: pointer;
-  }
-  &.active {
-    background: #e5f2ff;
-    border: 1px solid #0080f6;
-  }
-`
-
-export const STreatmentCard = (props) => {
-  const { name, description, cost, onClick, selected } = props
-
-  const handleChange = () => {
-    onClick(name)
-  }
-
-  return (
-    <ModuleCardBox onClick={handleChange} className={selected.includes(name) ? 'active' : undefined}>
-      <div className="module-card--header">
-        <p>{name}</p>
-        <p>{cost}, -</p>
-      </div>
-      {parse(description)}
-    </ModuleCardBox>
-  )
-}
