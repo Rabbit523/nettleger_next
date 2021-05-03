@@ -1,7 +1,17 @@
+import { useEffect } from 'react'
 import { Divider } from 'antd'
 import { Treatment1Box } from './style'
 
 function TreatmentStep5 () {
+  
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [])
+
   return (
     <Treatment1Box>
       <h1>Fullført</h1>

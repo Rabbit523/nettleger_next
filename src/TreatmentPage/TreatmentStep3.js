@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiFillLock } from 'react-icons/ai'
-import { Form, Input, Divider, Select, DatePicker } from 'antd';
-import { STreatment3Box } from './style'
+import { Form, Input, Select, InputNumber } from 'antd';
+import { STreatment3Box, SDivider } from './style'
 
 const { Option } = Select;
 
 const TreatmentStep3 = React.forwardRef((props, ref) => {
   const { form } = props
+
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [])
+
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select
@@ -39,7 +48,7 @@ const TreatmentStep3 = React.forwardRef((props, ref) => {
         >
           <Input placeholder="Fornavn" size="large" />
         </Form.Item>
-        <Divider style={{ margin: '12px 0' }} />
+        <SDivider />
         <Form.Item
           name="last_name"
           label="Etternavn"
@@ -54,7 +63,7 @@ const TreatmentStep3 = React.forwardRef((props, ref) => {
         >
           <Input placeholder="Etternavn" size="large" />
         </Form.Item>
-        <Divider style={{ margin: '12px 0' }} />
+        <SDivider />
         <Form.Item
           name="birthday"
           label="Fodselsnummer (11 siffer)"
@@ -67,9 +76,9 @@ const TreatmentStep3 = React.forwardRef((props, ref) => {
           hasFeedback
           style={{ marginBottom: '20px' }}
         >
-          <DatePicker size="large" style={{ width: '100%' }} placeholder="Fodselsnummer" format="DD/MM/YYYY" />
+          <InputNumber minLength="5" maxLength="11" size="large" style={{ width: '100%' }} placeholder="Fodselsnummer" />
         </Form.Item>
-        <Divider style={{ margin: '12px 0' }} />
+        <SDivider />
         <Form.Item
           name="mobile_number"
           label="Mobilnummer"
@@ -82,6 +91,25 @@ const TreatmentStep3 = React.forwardRef((props, ref) => {
           hasFeedback
           style={{ marginBottom: '20px' }}
         >
+          {/* <Input.Group compact style={{ display: 'flex'}}>
+            <Select
+              style={{
+                width: 150,
+              }}
+              defaultValue="47"
+              size="large"
+            >
+              <Option value="47">+47</Option>
+              <Option value="46">+46</Option>
+            </Select>
+            <InputNumber
+              placeholder="Mobilnummer"
+              size="large"
+              style={{
+                width: '100%',
+              }}
+            />
+          </Input.Group> */}
           <Input
             placeholder="Mobilnummer"
             size="large"
@@ -91,7 +119,7 @@ const TreatmentStep3 = React.forwardRef((props, ref) => {
             }}
           />
         </Form.Item>
-        <Divider style={{ margin: '12px 0' }} />
+        <SDivider />
         <Form.Item
           name="email"
           label="E-post"
@@ -110,7 +138,7 @@ const TreatmentStep3 = React.forwardRef((props, ref) => {
         >
           <Input placeholder="E-post" size="large" />
         </Form.Item>
-        <Divider style={{ margin: '12px 0' }} />
+        <SDivider />
         <p>Ved a bruke tjenesten godtar du <a href="/agreement">brukeravtalen</a>.</p>
       </Form>
     </STreatment3Box>
