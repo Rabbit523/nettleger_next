@@ -20,12 +20,17 @@ export const SContent = styled.div`
   background-position: center center;
   background-repeat: no-repeat;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => props.direction ? props.direction : 'column'};
   justify-content: center;
   position: relative;
   padding: 50px 0;
   margin-top: ${props => props.isMarginTop ? '180px' : '0'};
   background: ${props => props.background};
+  .banner {
+    p {
+      font-size: ${props => props.src ? '24px' : 'initial'};
+    }
+  }
   &::before {
     content: '';
     width: 100%;
@@ -33,7 +38,49 @@ export const SContent = styled.div`
     background-color: rgba(0,0,0,0.4);
     display: block;
     position: absolute;
-  }  
+  }
+  max-width: ${props => props.type === 'multiple' && !props.src ? '1200px' : 'unset'};
+  padding-right: ${props => props.type === 'multiple' && !props.src ? '15px' : 'unset'};
+  padding-left: ${props => props.type === 'multiple' && !props.src ? '15px' : 'unset'};
+  margin-right: ${props => props.type === 'multiple' && !props.src ? 'auto' : 'unset'};
+  margin-left: ${props => props.type === 'multiple' && !props.src ? 'auto' : 'unset'};
+  @media (min-width: 320px) {
+    margin-top: ${props => props.isMarginTop ? '650px' : '0'};
+    padding: 48px 0;
+    flex-direction: column;
+  }
+  @media (min-width: 576px) {
+    max-width: ${props => props.type === 'multiple' && !props.src ? '540px' : 'unset'};
+  }
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) {
+    max-width: ${props => props.type === 'multiple' && !props.src ? '720px' : 'unset'};
+  }
+
+  // Large devices (desktops, 992px and up)
+  @media (min-width: 992px) {
+    max-width: ${props => props.type === 'multiple' && !props.src ? '960px' : 'unset'};
+    margin-top: ${props => props.isMarginTop ? '180px' : '0'};
+    flex-direction: ${props => props.type === 'multiple' ? 'row' : 'column'};
+    padding: ${props => props.src ? '0' : '48px 0' };
+  }
+
+  // Extra large devices (large desktops, 1200px and up)
+  @media (min-width: 1200px) {
+    max-width: ${props => props.type === 'multiple' && !props.src ? '1140px' : 'unset'};
+  }
+`
+export const STextComponent = styled.div`
+  flex: 1.5;
+  @media (min-width: 320px) {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 15px;
+  }
+  @media (min-width: 1024px) {
+    margin-right: 25px;
+  }
 `
 export const STitle = styled(Title)`
   color: ${props => props.src ? '#fff!important' : '#000'};
@@ -45,15 +92,31 @@ export const STitle = styled(Title)`
 export const SSpace = styled.div`
   z-index: ${props => props.src ? 1 : 'unset'};
   width: ${props => props.src ? '47%' : '100%'};
+  @media (min-width: 320px) {
+    width: 100%;
+  }
+  @media (min-width: 1024px) {
+    width: ${props => props.src ? '47%' : '100%'};
+  }
 `
 export const SModuleWrapper = styled.div`
   display: flex;
   flex-direction: ${props => props.direction ? props.direction : 'row'};
-  align-items: center;
-  justify-content: space-between;
+  align-items: ${props=> props.direction ? 'unset' : 'center'};
+  justify-content: ${props=> props.direction ? 'unset' : 'space-between'};
   position: ${props => props.isBottom ? 'absolute' : 'relative'};
   bottom: ${props => props.isBottom ? '-120px' : 0};
   width: 100%;
+  flex: 1;
+  .behandlinger {
+    width: 100%;
+  }
+  @media (min-width: 320px) {
+    bottom: ${props => props.isBottom ? '-680px' : 0};
+  }
+  @media (min-width: 1024px) {
+    bottom: ${props => props.isBottom ? '-120px' : 0};
+  }
 `
 export const ModuleCardBox = styled.div`
   background: #fff;
@@ -62,6 +125,7 @@ export const ModuleCardBox = styled.div`
   max-width: 350px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   padding: 25px;
+  border-radius: 25px;
   border: 1px solid transparent;
   .module-card--body {
     display: flex;
@@ -100,6 +164,14 @@ export const ModuleCardBox = styled.div`
     border: 1px solid #407bff;
     cursor: pointer;
   }
+  @media (min-width: 320px) {
+    max-width: 100%;
+    margin-bottom: 25px;
+  }
+  @media (min-width: 1024px) {
+    max-width: 350px;
+    margin-bottom: 0;
+  }
 `
 export const SButtonWrapper = styled.div`
   display: flex;
@@ -117,8 +189,10 @@ export const SButton = styled.a`
   text-transform: uppercase;
   font-weight: bold;
   width: ${props => props.width};
-  color: #000;
+  color: #fff;
+  border-radius: 25px;
   &:hover {
+    background: #83b9ea;
     color: #fff;
   }
 `
@@ -133,7 +207,7 @@ export const STreatmentCard = React.forwardRef(({ onClick, href, ...props }, ref
       </div>
       <div className="module-card--footer">
         <p>{cost}, -</p>
-        <SButton background="#47ffb3" href={href} onClick={onClick} ref={ref}>bestill</SButton>
+        <SButton background="#0080f6" href={href} onClick={onClick} ref={ref}>bestill</SButton>
       </div>
     </ModuleCardBox>
   )
