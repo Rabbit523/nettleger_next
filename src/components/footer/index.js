@@ -21,33 +21,32 @@ function Footer(props) {
             <label>Finn frem</label>
             <div className="link-group">
               {slugs.map((slug, index) => {
-                return slug.slug!== 'home' && <a href={slug.slug} key={index}>{slug.name}</a>
+                return slug.slug!== 'home' && <a href={`/${slug.slug}`} key={index}>{slug.name}</a>
               })}
             </div>
           </div>
           <div className="footer-body-links--treatment">
             <label>Behandlinger</label>
             <div className="link-group">
-              {treatments.map((treatment, index) => 
-                <a href={`/${treatment.name}`} key={index}>{treatment.name}</a>
-              )}
+              {treatments.map((treatment, index) => {
+                return treatment.name !== 'Chat Konsultasjon' ? <a href={`/behandling/${treatment.link}`} key={index}>{treatment.name}</a> : null
+              })}
             </div>
           </div>
           <div className="footer-body-links--contact">
             <label>Kontakt oss</label>
             <div className="link-group">
               <a href="mailto:info@nettleger.no"><MailFilled fill="#fff"/>info@nettleger.no</a>
-              <a href="tel:004745454545"><PhoneFilled fill="#fff"/>47 45 45 45 45</a>
-              <a href="/"><EnvironmentFilled fill="#fff"/>Adreseveien 123, 0599 Oslo</a>
+              <a href="tel:+4793865855"><PhoneFilled fill="#fff"/>+47 93 86 58 55</a>
+              <a href="/"><EnvironmentFilled fill="#fff"/>Fjellstuveien 47, 0982 OSLO</a>
             </div>
           </div>
         </div>
       </div>
       <div className="footer--bottom">
-        <p>© 2020 Skjønnhetslegen AS. Med enerett. Crafted by: FantasyLab.</p>
+        <p>© {new Date().getFullYear()} Skjønnhetslegen AS. Med enerett. Crafted by: <a href="https://fantasylab.io" target="_blank">FantasyLab.</a></p>
         <div className="footer-bottom--social">
-          <a href="https://www.facebook.com/"><FaFacebookF /></a>
-          <a href="https://www.instagram.com/"><FaInstagram /></a>
+          <a href="https://www.facebook.com/nettleger" className="icon" target="_blank"><FaFacebookF /></a>
         </div>
       </div>
     </SContainer>

@@ -38,6 +38,9 @@ export const SFooter = styled.div`
           span {
             padding-right: 5px;
           }
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }
@@ -52,12 +55,17 @@ export const SFooter = styled.div`
       margin: 0;
     }
     a {
-      background: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content:center;
-      padding: 5px;
+      text-decoration: underline;
+      color: #fff;
+      &.icon {
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content:center;
+        padding: 5px;
+        text-transform: none;
+      }
     }
     .footer-bottom--social {
       display: flex;
@@ -66,6 +74,24 @@ export const SFooter = styled.div`
         margin: 0 0.5em;
         color: #1890ff;
       }
+    }
+  }
+  @media (min-width: 320px) {
+    .footer--body {
+      flex-direction: column;
+      .footer-body--links {
+        flex-direction: column;
+        margin: 0;
+      }
+    }
+  }
+  @media (min-width: 1024px) {
+    .footer--body {
+      flex-direction: row;
+      .footer-body--links {
+          flex-direction: row;
+          margin-left: 25px;
+        }
     }
   }
 `
