@@ -1,11 +1,10 @@
-import Loader from 'react-loader-spinner'
-import { Wrapper } from './style'
+import { SSpin } from './style'
 
-export default function Loading(props) {
-  const { isLoading } = props
+export default function Loader(props) {
   return (
-    <Wrapper>
-      <Loader visible={isLoading} type="Grid" color="#ddd" />
-    </Wrapper>
+    <SSpin
+      spinning={props.isLoading}
+      size="large"
+    />
   )
 }
