@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Steps, Form } from 'antd'
 import { useRouter } from 'next/router'
+import Head from 'next/head';
 import Seo from 'components/Seo'
 import Navbar from 'components/navbar'
 import Footer from 'components/footer'
@@ -124,6 +125,15 @@ const TreatmentPage = (props) => {
 
   return (
     <SLayout>
+      <Head>
+        {
+          process.env.NODE_ENV == 'development' ?
+            <script type="text/javascript" src="https://test.checkout.dibspayment.eu/v1/checkout.js?v=1"></script>
+          : 
+            <script type="text/javascript" src="https://checkout.dibspayment.eu/v1/checkout.js?v=1"></script>
+        }
+        
+      </Head>
       <Seo meta_title={meta_title ? meta_title : `${name} - Nettleger`} meta_description={meta_description} />
       <Navbar items={slugs} />
       <PageContainer>
